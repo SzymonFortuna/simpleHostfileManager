@@ -1,12 +1,22 @@
 #!/bin/bash
 if [ $# -ne 2 ] || [ -z $1 -o -z $2 ];
 then
-echo -n 'IP address: '
-read ipaddr
-echo -n 'Desired hostname: '
-read hostname
-sudo sh -c "echo $ipaddr'\t'$hostname >>/etc/hosts"
+	echo -n 'IP address: '
+	read ipaddr
+	echo -n 'Desired hostname: '
+	read hostname
+	if [ $UID -ne 0 ]
+	then
+		sudo sh -c "echo $ipaddr'\t'$hostname >>/etc/hosts"
+	else
+		echo -e "$ipaddr \t$hostname" >> /etc/hosts
+	fi
 else
-sudo sh -c "echo $1'\t'$2 >> /etc/hosts"
+	if [ $UID -ne 0 ]
+	then
+		sudo sh -c "echo $1 '\t' $2 >> /etc/hosts"
+	else
+		echo -e "$1 \t$2" >> /etc/hosts
+	fi
 fi
-
+#cat /etc/hosts
