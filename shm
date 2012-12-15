@@ -1,0 +1,7 @@
+#!/bin/bash
+echo -e 'IP address:'
+read ipaddr
+echo -e 'Desired hostname:'
+read hostname
+sudo sh -c "echo $ipaddr'\t'$hostname >>/etc/hosts"
+
