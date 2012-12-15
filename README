@@ -1,4 +1,5 @@
 SHM - Simple Hostfile Manager
+needs access to sudo or root account
 
 usage:
 
@@ -8,4 +9,3 @@ or simply ./shm
 
 v 0.1 - it actually somehow works!
 
-known issues: works only when user is able to sudo (doesn't work when root)
