@@ -1,7 +1,12 @@
 #!/bin/bash
+if [ -z $1 -o -z $2 ];
+then
 echo -n 'IP address: '
 read ipaddr
 echo -n 'Desired hostname: '
 read hostname
 sudo sh -c "echo $ipaddr'\t'$hostname >>/etc/hosts"
+else
+sudo sh -c "echo $1'\t'$2 >> /etc/hosts"
+fi
 
