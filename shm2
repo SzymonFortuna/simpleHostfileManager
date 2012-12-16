@@ -1,0 +1,46 @@
+#!/bin/bash
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+hostfile management hand
+
+OPTIONS:
+   -h     shows this message
+   -a     adds address
+   -n     removes name
+   -r     removes address     
+EOF
+}
+while getopts "t:r:p:v" OPTION
+do
+	case $OPTION in
+		h)
+		usage
+		exit1
+		;;
+	esac
+done
+if [ $# -ne 2 ] || [ -z $1 -o -z $2 ];
+then
+	echo -n 'IP address: '
+	read ipaddr
+	echo -n 'Desired hostname: '
+	read hostname
+	if [ $UID -ne 0 ]
+	then
+		sudo sh -c "echo $ipaddr'\t'$hostname >>/etc/hosts"
+	else
+		echo -e "$ipaddr \t$hostname" >> /etc/hosts
+	fi
+else
+	if [ $UID -ne 0 ]
+	then
+		sudo sh -c "echo $1 '\t' $2 >> /etc/hosts"
+	else
+		echo -e "$1 \t$2" >> /etc/hosts
+	fi
+fi
+#cat /etc/hosts

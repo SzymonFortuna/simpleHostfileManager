@@ -9,3 +9,7 @@ or simply ./shm
 
 v 0.1 - it actually somehow works!
 
+to do:
+- better parameter handling
+- removing entries from the list
+- generating ssh scripts
